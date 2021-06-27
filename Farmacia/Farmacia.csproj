@@ -85,6 +85,12 @@
     <Compile Include="Vistas\Frm_ListadocClientes.Designer.cs">
       <DependentUpon>Frm_ListadocClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\frm_login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\frm_login.designer.cs">
+      <DependentUpon>frm_login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Frm_Registro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     </Compile>
     <EmbeddedResource Include="Vistas\Frm_ListadocClientes.resx">
       <DependentUpon>Frm_ListadocClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\frm_login.resx">
+      <DependentUpon>frm_login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Frm_Registro.resx">
       <DependentUpon>Frm_Registro.cs</DependentUpon>
