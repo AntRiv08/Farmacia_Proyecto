@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_FarmaciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_rol">
+          <Key>
+            <PropertyRef Name="rol_id" />
+          </Key>
+          <Property Name="rol_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rol_nombrev" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="rol_estado" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_usuario">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usu_nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="usu_apellido" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="usu_fecha_nac" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="usu_dni" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="usu_contraseña" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="usu_estado" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="usu_correo" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="usu_direccion" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="rol_id" Type="int" />
+        </EntityType>
+        <Association Name="Relationship2">
+          <End Role="tbl_rol" Type="Self.tbl_rol" Multiplicity="0..1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_rol">
+              <PropertyRef Name="rol_id" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_FarmaciaModelStoreContainer">
+          <EntitySet Name="tbl_rol" EntityType="Self.tbl_rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Relationship2" Association="Self.Relationship2">
+            <End Role="tbl_rol" EntitySet="tbl_rol" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_FarmaciaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_rol">
+          <Key>
+            <PropertyRef Name="rol_id" />
+          </Key>
+          <Property Name="rol_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rol_nombrev" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol_estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_usuario" Relationship="Self.Relationship2" FromRole="tbl_rol" ToRole="tbl_usuario" />
+        </EntityType>
+        <EntityType Name="tbl_usuario">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usu_nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_apellido" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_fecha_nac" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_dni" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_contraseña" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_correo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_direccion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol_id" Type="Int32" />
+          <NavigationProperty Name="tbl_rol" Relationship="Self.Relationship2" FromRole="tbl_usuario" ToRole="tbl_rol" />
+        </EntityType>
+        <Association Name="Relationship2">
+          <End Role="tbl_rol" Type="Self.tbl_rol" Multiplicity="0..1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_rol">
+              <PropertyRef Name="rol_id" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities_farmacia" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_rol" EntityType="Self.tbl_rol" />
+          <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" />
+          <AssociationSet Name="Relationship2" Association="Self.Relationship2">
+            <End Role="tbl_rol" EntitySet="tbl_rol" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_FarmaciaModelStoreContainer" CdmEntityContainer="Entities_farmacia">
+          <EntitySetMapping Name="tbl_rol">
+            <EntityTypeMapping TypeName="DB_FarmaciaModel.tbl_rol">
+              <MappingFragment StoreEntitySet="tbl_rol">
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+                <ScalarProperty Name="rol_nombrev" ColumnName="rol_nombrev" />
+                <ScalarProperty Name="rol_estado" ColumnName="rol_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_usuario">
+            <EntityTypeMapping TypeName="DB_FarmaciaModel.tbl_usuario">
+              <MappingFragment StoreEntitySet="tbl_usuario">
+                <ScalarProperty Name="usu_id" ColumnName="usu_id" />
+                <ScalarProperty Name="usu_nombre" ColumnName="usu_nombre" />
+                <ScalarProperty Name="usu_apellido" ColumnName="usu_apellido" />
+                <ScalarProperty Name="usu_fecha_nac" ColumnName="usu_fecha_nac" />
+                <ScalarProperty Name="usu_dni" ColumnName="usu_dni" />
+                <ScalarProperty Name="usu_contraseña" ColumnName="usu_contraseña" />
+                <ScalarProperty Name="usu_estado" ColumnName="usu_estado" />
+                <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
+                <ScalarProperty Name="usu_direccion" ColumnName="usu_direccion" />
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
