@@ -17,7 +17,7 @@ namespace Farmacia
 
         SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-70AG0U86;Initial Catalog=DB_Farmacias;Integrated Security=True");
 
-        public frm_login()
+        public frm_login() 
         {
             InitializeComponent();
         }
