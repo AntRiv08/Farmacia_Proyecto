@@ -79,6 +79,12 @@
     <Compile Include="tbl_usuario.cs">
       <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\FrmFarmacia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\FrmFarmacia.Designer.cs">
+      <DependentUpon>FrmFarmacia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Frm_ListadocClientes.cs">
       <SubType>Form</SubType>
     </Compile>

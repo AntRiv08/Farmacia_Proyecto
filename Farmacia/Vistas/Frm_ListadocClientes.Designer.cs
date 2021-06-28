@@ -54,7 +54,7 @@ namespace Farmacia.Vistas
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(5, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(783, 428);
+            this.panel1.Size = new System.Drawing.Size(783, 411);
             this.panel1.TabIndex = 0;
             // 
             // label2

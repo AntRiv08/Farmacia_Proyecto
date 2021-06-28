@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Farmacia.Vistas;
 
 namespace Farmacia
 {
@@ -15,7 +16,7 @@ namespace Farmacia
     {
         //Conexion con la base de datos
 
-        SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-70AG0U86;Initial Catalog=DB_Farmacias;Integrated Security=True");
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-K33EK4L;Initial Catalog=db_Sfarmacia;Integrated Security=true");
 
         public frm_login() 
         {
@@ -41,29 +42,73 @@ namespace Farmacia
         {
 
         }
-
+        private void btn_ingresar_Click(object sender, EventArgs e)
+        {
+            logear(txt_usuario.Text, txt_pass.Text);
+        }
         private void logear(string nombre, string pass)
         {
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("select * from tbl_usuario where usu_nombre = @nom", con);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM tbl_usuario where usu_nombre= @nom" , con);
                 cmd.Parameters.AddWithValue("nom", nombre);
-                SqlDataAdapter sda = new SqlDataAdapter();
+                string nombreusu = nombre;
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
                 con.Close();
+                if (dt.Rows.Count == 1)
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("select usu_nombre, rol_id from tbl_usuario where usu_nombre= @nom and usu_contraseña = @passw", con);
+                    cmd1.Parameters.AddWithValue("nom", nombre);
+                    cmd1.Parameters.AddWithValue("passw", pass);
+                    SqlDataAdapter sda1 = new SqlDataAdapter(cmd1);
+                    DataTable dt1 = new DataTable();
+                    sda1.Fill(dt1);
+
+                    con.Close();
+                    if (dt1.Rows.Count == 1)
+                    {
+                        this.Hide();
+                        if (dt1.Rows[0][1].ToString() == "1")
+                        {
+                            Frm_ListadocClientes capadmin = new Frm_ListadocClientes();
+                            capadmin.ShowDialog();
+                            
+                        }
+                        else if (dt1.Rows[0][1].ToString() == "2")
+                        {
+                            FrmFarmacia capfarm = new FrmFarmacia();
+                            capfarm.ShowDialog();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("usuario no registrado");
+                }
+                       
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                 
-                throw;
+
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private void btn_ingresar_Click(object sender, EventArgs e)
+        
+
+        private void frm_login_Load(object sender, EventArgs e)
         {
-            logear(txt_usuario.Text, txt_pass.Text);
+            
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Frm_Registro capregistro = new Frm_Registro();
+            capregistro.ShowDialog();
         }
     }
 }
